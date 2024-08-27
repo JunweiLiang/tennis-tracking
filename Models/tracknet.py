@@ -4,11 +4,12 @@ from keras.layers import *
 def trackNet( n_classes ,  input_height, input_width ): # input_height = 360, input_width = 640
 
 	imgs_input = Input(shape=(3,input_height,input_width))
-
+	print("input")
 	#layer1
 	x = Conv2D(64, (3, 3), kernel_initializer='random_uniform', padding='same', data_format='channels_first' )(imgs_input)
 	x = ( Activation('relu'))(x)
 	x = ( BatchNormalization())(x)
+	print("layer1")
 
 	#layer2
 	x = Conv2D(64, (3, 3), kernel_initializer='random_uniform', padding='same', data_format='channels_first' )(x)
