@@ -7,7 +7,9 @@ def trackNet( n_classes ,  input_height, input_width ): # input_height = 360, in
 	print("input")
 	#layer1
 	x = Conv2D(64, (3, 3), kernel_initializer='random_uniform', padding='same', data_format='channels_first' )(imgs_input)
+	print("conv")
 	x = ( Activation('relu'))(x)
+	print("act")
 	x = ( BatchNormalization())(x)
 	print("layer1")
 
