@@ -7,7 +7,14 @@ import os
 from PIL import Image, ImageDraw
 import cv2 
 import numpy as np
-import tensorflow as tf
+import tensorflow as tf # junwei: tensorflow needed to be imported first before pytorch
+# https://github.com/keras-team/keras/issues/13093#issuecomment-552382222
+# junweil: additional dependancies needed
+# conda install pytorch==1.9.1 torchvision==0.10.1 torchaudio==0.9.1 cudatoolkit=11.3 -c pytorch -c conda-forge
+# python -m pip install keras==2.6
+# python -m pip install numba==0.53
+# python -m pip install matplotlib==3.6
+# python -m pip install scikit-learn==0.24
 import torch
 import sys
 import time
@@ -26,6 +33,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument("--input_video_path", type=str)
 parser.add_argument("--output_video_path", type=str, default="")
+parser.add_argument("--output_video_with_minimap_path", type=str, default="VideoOutput/final_video.mp4")
 parser.add_argument("--minimap", type=int, default=0)
 parser.add_argument("--bounce", type=int, default=0)
 
@@ -353,7 +361,8 @@ if bounce == 1:
   print(fps)
   print(length)
 
-  output_video = cv2.VideoWriter('VideoOutput/final_video.mp4', fourcc, fps, (output_width, output_height))
+  #output_video = cv2.VideoWriter('VideoOutput/final_video.mp4', fourcc, fps, (output_width, output_height))
+  output_video = cv2.VideoWriter(args.output_video_with_minimap_path, fourcc, fps, (output_width, output_height))
   i = 0
   while True:
     ret, frame = video.read()
